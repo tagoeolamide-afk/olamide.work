@@ -25,7 +25,11 @@ export default function FrameSlot({
         // Fixed-ratio frame + object-contain: images fit the frame with no crop
         // and no distortion, and before/after pairs line up at equal height.
         <div
-          className="overflow-hidden rounded-[var(--radius)] border border-[color:var(--hairline)] bg-[#f2f2f2]"
+          data-zoom
+          role="button"
+          tabIndex={0}
+          aria-label={`View image: ${alt}`}
+          className="cursor-zoom-in overflow-hidden rounded-[var(--radius)] border border-[color:var(--hairline)] bg-[#f2f2f2] transition-opacity hover:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[color:var(--ink)]"
           style={{ aspectRatio: ratio }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}

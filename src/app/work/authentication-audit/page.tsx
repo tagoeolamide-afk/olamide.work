@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { site } from "@/content/site";
 import FrameSlot from "@/components/FrameSlot";
+import Lightbox from "@/components/Lightbox";
 
 const DIR = "/images/authentication-audit";
 
@@ -187,6 +188,7 @@ function Msg({ label, text }: { label: string; text: string }) {
 
 export default function AuthenticationAuditPage() {
   return (
+    <Lightbox>
     <main id="main" className="mx-auto w-full max-w-[900px] px-6 pb-24 pt-8">
       {/* header / back nav */}
       <header className="flex items-baseline justify-between">
@@ -217,6 +219,30 @@ export default function AuthenticationAuditPage() {
           ratio="16 / 10"
         />
       </div>
+
+      {/* privacy disclaimer for the screenshots */}
+      <p className="mt-4 flex items-start gap-2 text-[13px] leading-snug text-[color:var(--muted)]">
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          className="mt-[0.15em] shrink-0"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
+          <path
+            d="M12 11v5M12 8h.01"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+        </svg>
+        <span>
+          Note: the company&rsquo;s logo has been blurred out in every screenshot on this page
+          to protect its privacy.
+        </span>
+      </p>
 
       {/* metadata row */}
       <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-[color:var(--hairline)] pt-8 sm:grid-cols-4">
@@ -991,5 +1017,6 @@ export default function AuthenticationAuditPage() {
         </a>
       </footer>
     </main>
+    </Lightbox>
   );
 }
