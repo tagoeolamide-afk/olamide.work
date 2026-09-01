@@ -5,8 +5,13 @@ import { caseStudies } from "@/content/case-studies";
 import { site } from "@/content/site";
 import { listFrames } from "@/lib/assets";
 
+// Slugs with their own dedicated route (richer than the frame-stack template).
+const DEDICATED = new Set(["authentication-audit"]);
+
 export function generateStaticParams() {
-  return Object.keys(caseStudies).map((slug) => ({ slug }));
+  return Object.keys(caseStudies)
+    .filter((slug) => !DEDICATED.has(slug))
+    .map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({

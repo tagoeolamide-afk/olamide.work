@@ -22,14 +22,23 @@ export const site = {
     "A few pieces below represent my work at its most intentional — real problems, real constraints, and the reasoning I'd defend in a room.",
   ],
 
-  // TODO(confirm): fill these.
+  /** Short About section (recruiter-focused). */
+  about: [
+    "I design product experiences that connect interface clarity with system behavior. My work sits across UI, UX, and frontend implementation, with a strong interest in fintech, authentication flows, onboarding, dashboards, and design systems.",
+    "I come from an International law and diplomacy background, so I pay close attention to trust, risk, edge cases, and how products behave when something goes wrong. I do not only design clean screens. I design flows that help users understand what to do, recover from mistakes, and move forward with confidence.",
+  ],
+
+  /** Copy for the "Open to product design roles" contact block. */
+  rolesCopy:
+    "I am open to product design, UI/UX, and frontend-aware design roles. I am especially interested in teams building fintech, SaaS, commerce, developer tools, and workflow products.",
+
   location: "Lagos, Nigeria",
   availability: "Open to full-time product design roles",
   email: "tagoe.olamide@gmail.com",
 
   // Only non-empty links render.
   links: {
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/daniel-tagoe-0aa02b265/",
     github: "",
     dribbble: "",
     behance: "",
@@ -43,6 +52,11 @@ export type WorkCard = {
   descriptor: string;
   thumb: string; // /public path; a labelled frame shows until it exists
   href?: string; // optional — cards without a link render as a plain figure
+  /** Optional preview video for the thumbnail; plays (muted, looped) once the
+   *  file exists, otherwise the static thumb shows. */
+  video?: string;
+  /** Short scannable tags shown under the descriptor. */
+  tags?: string[];
 };
 
 export const selectedWork: WorkCard[] = [
@@ -52,13 +66,15 @@ export const selectedWork: WorkCard[] = [
       "A single place for Nigerian freelancers to receive, hold, and spend dollar income — designed inside real CBN constraints.",
     thumb: "/images/pave/frames/01.png",
     href: "/work/pave",
+    tags: ["Fintech", "Mobile App", "Product Strategy", "UX Design", "Payments"],
   },
   {
-    title: "Authentication, audited",
+    title: "Authentication System Audit",
     descriptor:
-      "An independent, four-framework audit of a YC-backed payments platform's auth flow — 55 issues found, 33 screens redesigned.",
+      "An independent UX audit and redesign of a fintech authentication flow, focused on security-adjacent UX, accessibility, error handling, and onboarding clarity.",
     thumb: "/images/authentication-audit/frames/1.png",
     href: "/work/authentication-audit",
+    tags: ["Fintech", "UX Audit", "Security UX", "Accessibility", "Onboarding"],
   },
 ];
 
@@ -75,6 +91,8 @@ export type CraftItem = {
   description: string;
   /** Screen recording (mp4/webm); replaces the thumbnail on the page when set. */
   video?: string;
+  /** Short scannable tags shown under the descriptor. */
+  tags?: string[];
 };
 
 /**
@@ -93,6 +111,7 @@ export const craft: CraftItem[] = [
     liveUrl: "https://creative-agency-six-red.vercel.app",
     description:
       "A dark, high-energy landing page for an agency that builds personalized, interactive video. The hero pairs heavy display type with a full-bleed row of vivid content cards to signal range and confidence before a single word is read.",
+    tags: ["Landing Page", "Web Design"],
   },
   {
     slug: "weme",
@@ -102,6 +121,7 @@ export const craft: CraftItem[] = [
     liveUrl: "https://wemelandingpage.vercel.app",
     description:
       "A bright, playful hero for Weme, an AI tool for capturing and elevating ideas. Fanned UNO-style cards give the page a tactile personality against a clean off-white ground, keeping it approachable rather than cold and technical.",
+    tags: ["Landing Page", "AI", "Web Design"],
   },
   {
     slug: "vibe-coding-industry",
@@ -111,6 +131,7 @@ export const craft: CraftItem[] = [
     liveUrl: "https://vibecoding-six-ashy.vercel.app",
     description:
       "A typographic exploration titled Vibe Coding Industry — oversized display type anchored by scattered, colourful skill pills (Claude, Figma Make, Design Engineering) that read like a moodboard of the moment.",
+    tags: ["Editorial", "Typography"],
   },
   {
     slug: "pricing-card-component",
@@ -120,6 +141,7 @@ export const craft: CraftItem[] = [
     liveUrl: "https://princing-layout.vercel.app",
     description:
       "A three-tier pricing section with a monthly/yearly toggle and clear feature checklists — designed so choosing a plan is a two-second scan, not a feature-matrix chore.",
+    tags: ["UI Component", "Pricing", "SaaS"],
   },
   {
     slug: "apex-footer",
@@ -129,6 +151,7 @@ export const craft: CraftItem[] = [
     liveUrl: "https://apexfooter.vercel.app",
     description:
       "A bold closing footer for Apex, a modern finance tool. A confident “let's build something cool” line sits above tidy link columns and a scatter of sticker-style service tags.",
+    tags: ["UI Component", "Fintech"],
   },
   {
     slug: "nc-gallery",
@@ -138,5 +161,32 @@ export const craft: CraftItem[] = [
     liveUrl: "https://nc-gallery.vercel.app",
     description:
       "A gallery web UI: a tight thumbnail grid on the left pairs with a large preview pane on the right, so browsing and viewing happen without ever leaving the page.",
+    tags: ["UI Design", "Gallery"],
+  },
+];
+
+/* ---- Core skills (recruiter-focused, scannable) ----------- */
+export const skills: { group: string; items: string[] }[] = [
+  {
+    group: "Product Design",
+    items: [
+      "UX audits",
+      "User flows",
+      "Wireframes",
+      "High-fidelity UI",
+      "Interaction design",
+      "Design systems",
+    ],
+  },
+  {
+    group: "Product Thinking",
+    items: [
+      "Authentication UX",
+      "Onboarding flows",
+      "Error states",
+      "Accessibility review",
+      "Fintech trust patterns",
+      "Edge-case analysis",
+    ],
   },
 ];

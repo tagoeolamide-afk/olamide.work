@@ -10,11 +10,27 @@ import { assetExists } from "@/lib/assets";
  * without one render as a plain figure.
  */
 export default function WorkCard({ card }: { card: WorkCardType }) {
+  const hasVideo = !!card.video && assetExists(card.video);
   const hasThumb = assetExists(card.thumb);
 
   const media = (
     <div className="card-media">
-      {hasThumb ? (
+      {hasVideo ? (
+        // Video replaces the thumbnail: muted, looped, autoplay (native — works
+        // on mobile with playsInline). The static thumb is the poster/fallback.
+        <video
+          className="absolute inset-0 h-full w-full object-contain"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={hasThumb ? card.thumb : undefined}
+          aria-label={card.title}
+        >
+          <source src={card.video} type="video/mp4" />
+        </video>
+      ) : hasThumb ? (
         // Explicit dimensions (not `fill`) so the loader never race-picks an
         // oversized candidate before grid layout settles. object-contain fits
         // the whole frame into the 16:10 card without cropping.
@@ -42,6 +58,18 @@ export default function WorkCard({ card }: { card: WorkCardType }) {
       {media}
       <h3 className="t-card-title mt-[9px]">{card.title}</h3>
       <p className="t-card-desc mt-1">{card.descriptor}</p>
+      {card.tags && card.tags.length > 0 && (
+        <ul className="mt-2 flex flex-wrap gap-1.5">
+          {card.tags.map((t) => (
+            <li
+              key={t}
+              className="rounded-full border border-[color:var(--hairline)] px-2 py-0.5 text-[11px] text-[color:var(--muted)]"
+            >
+              {t}
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 
