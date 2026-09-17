@@ -38,12 +38,12 @@ export default function Home() {
     .toUpperCase();
 
   return (
-    <main id="main" className="mx-auto w-full max-w-[720px] px-6 pb-20">
+    <main id="main" className="mx-auto w-full max-w-[1120px] px-6 pb-20 sm:px-8">
       <Nav />
 
-      {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="pt-8 sm:pt-12">
-        <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border border-[color:var(--hairline)] bg-[color:var(--surface)]">
+      {/* ── Hero (left-aligned content column) ───────────────── */}
+      <section className="max-w-[560px] pt-8 sm:pt-12">
+        <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border border-[color:var(--hairline)] bg-[color:var(--surface)] sm:hidden">
           {hasAvatar ? (
             <Image src={avatar} alt={name} width={56} height={56} className="h-full w-full object-cover" />
           ) : (
@@ -51,15 +51,14 @@ export default function Home() {
           )}
         </div>
 
-        <h1 className="mt-6 text-[clamp(2.25rem,6vw,3.25rem)] font-semibold leading-[1.02] tracking-[-0.03em]">
+        <h1 className="mt-6 text-[clamp(2.25rem,6vw,3.25rem)] font-medium leading-[1.02] tracking-[-0.03em] sm:mt-0">
           {name}
         </h1>
 
-        <p className="mt-4 max-w-[40ch] text-[clamp(1.0625rem,2.4vw,1.3125rem)] leading-[1.45]">
-          Product designer{" "}
-          <span className="dim">focused on</span> fintech, authentication, and onboarding{" "}
-          <span className="dim">— flows that build</span> <span className="hi">trust</span>{" "}
-          <span className="dim">and help people recover when something breaks.</span>
+        <p className="mt-4 max-w-[42ch] text-[clamp(1.0625rem,2.4vw,1.3125rem)] leading-[1.45] text-[color:var(--text-dim)]">
+          <span className="hi">Product designer</span> focused on fintech, authentication,
+          and onboarding — flows that build trust and help people recover when something
+          breaks.
         </p>
 
         <div className="mt-7 flex flex-wrap items-center gap-3">
@@ -78,25 +77,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── My latest work ───────────────────────────────────── */}
-      <section id="work" className="mt-24 scroll-mt-8 space-y-16">
-        {latest.map((p) => (
-          <Link key={p.href} href={p.href} className="group block">
-            <h2 className="text-[clamp(1.25rem,3vw,1.625rem)] font-medium tracking-[-0.02em]">
-              {p.lead} <span className="dim">{p.dim}</span>
-            </h2>
-            <div className="mt-4 overflow-hidden rounded-2xl border border-[color:var(--hairline)] bg-[color:var(--surface)]">
-              <Image
-                src={p.img}
-                alt={`${p.lead} ${p.dim}`}
-                width={1600}
-                height={1000}
-                sizes="(max-width: 760px) 100vw, 720px"
-                className="h-auto w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-              />
-            </div>
-          </Link>
-        ))}
+      {/* ── My latest work (2-col grid, spans full container) ── */}
+      <section id="work" className="mt-24 scroll-mt-8">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2">
+          {latest.map((p) => (
+            <Link key={p.href} href={p.href} className="group block">
+              <h2 className="text-[clamp(1.25rem,3vw,1.625rem)] font-medium tracking-[-0.02em]">
+                {p.lead} <span className="dim">{p.dim}</span>
+              </h2>
+              <div className="mt-4 overflow-hidden rounded-2xl border border-[color:var(--hairline)] bg-[color:var(--surface)]">
+                <Image
+                  src={p.img}
+                  alt={`${p.lead} ${p.dim}`}
+                  width={1600}
+                  height={1000}
+                  sizes="(max-width: 768px) 100vw, 545px"
+                  className="h-auto w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                />
+              </div>
+            </Link>
+          ))}
+        </div>
       </section>
 
       <Footer />

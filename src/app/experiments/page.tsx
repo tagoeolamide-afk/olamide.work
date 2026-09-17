@@ -27,11 +27,11 @@ export default function ExperimentsPage() {
   });
 
   return (
-    <main id="main" className="mx-auto w-full max-w-[860px] px-6 pb-20">
+    <main id="main" className="mx-auto w-full max-w-[1120px] px-6 pb-20 sm:px-8">
       <Nav />
 
-      {/* ── Header ───────────────────────────────────────────── */}
-      <section className="pt-8 sm:pt-12">
+      {/* ── Header (left-aligned) ────────────────────────────── */}
+      <section className="max-w-[560px] pt-8 sm:pt-12">
         <h1 className="text-[clamp(2.25rem,6vw,3.25rem)] font-semibold leading-[1.02] tracking-[-0.03em]">
           Experiments
         </h1>
@@ -41,8 +41,8 @@ export default function ExperimentsPage() {
         </p>
       </section>
 
-      {/* ── Pinterest grid + detail modal ────────────────────── */}
-      <section className="mt-12">
+      {/* ── Pinterest grid + detail modal (left-aligned) ─────── */}
+      <section className="mt-12 max-w-[820px]">
         <ExperimentsGrid items={items} />
       </section>
 
