@@ -93,6 +93,8 @@ export type CraftItem = {
   video?: string;
   /** Short scannable tags shown under the descriptor. */
   tags?: string[];
+  /** Tool keys for the modal's tool icons (svg at /public/icons/<key>.svg). */
+  tools?: string[];
 };
 
 /**
@@ -112,6 +114,7 @@ export const craft: CraftItem[] = [
     description:
       "A dark, high-energy landing page for an agency that builds personalized, interactive video. The hero pairs heavy display type with a full-bleed row of vivid content cards to signal range and confidence before a single word is read.",
     tags: ["Landing Page", "Web Design"],
+    tools: ["figma", "framer", "claude"],
   },
   {
     slug: "weme",
@@ -122,6 +125,7 @@ export const craft: CraftItem[] = [
     description:
       "A bright, playful hero for Weme, an AI tool for capturing and elevating ideas. Fanned UNO-style cards give the page a tactile personality against a clean off-white ground, keeping it approachable rather than cold and technical.",
     tags: ["Landing Page", "AI", "Web Design"],
+    tools: ["figma", "framer", "claude"],
   },
   {
     slug: "vibe-coding-industry",
@@ -132,6 +136,7 @@ export const craft: CraftItem[] = [
     description:
       "A typographic exploration titled Vibe Coding Industry — oversized display type anchored by scattered, colourful skill pills (Claude, Figma Make, Design Engineering) that read like a moodboard of the moment.",
     tags: ["Editorial", "Typography"],
+    tools: ["figma", "framer", "claude"],
   },
   {
     slug: "pricing-card-component",
@@ -142,6 +147,7 @@ export const craft: CraftItem[] = [
     description:
       "A three-tier pricing section with a monthly/yearly toggle and clear feature checklists — designed so choosing a plan is a two-second scan, not a feature-matrix chore.",
     tags: ["UI Component", "Pricing", "SaaS"],
+    tools: ["figma", "framer", "claude"],
   },
   {
     slug: "apex-footer",
@@ -152,6 +158,7 @@ export const craft: CraftItem[] = [
     description:
       "A bold closing footer for Apex, a modern finance tool. A confident “let's build something cool” line sits above tidy link columns and a scatter of sticker-style service tags.",
     tags: ["UI Component", "Fintech"],
+    tools: ["figma", "framer", "claude"],
   },
   {
     slug: "nc-gallery",
@@ -162,6 +169,7 @@ export const craft: CraftItem[] = [
     description:
       "A gallery web UI: a tight thumbnail grid on the left pairs with a large preview pane on the right, so browsing and viewing happen without ever leaving the page.",
     tags: ["UI Design", "Gallery"],
+    tools: ["figma", "framer", "claude"],
   },
 ];
 

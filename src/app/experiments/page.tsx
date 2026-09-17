@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { site, craft } from "@/content/site";
+import { assetExists } from "@/lib/assets";
 import Nav from "@/components/Nav";
-import WorkCard from "@/components/WorkCard";
 import Footer from "@/components/Footer";
+import ExperimentsGrid, { type ExpItem } from "@/components/ExperimentsGrid";
 
 export const metadata: Metadata = {
   title: `Experiments — ${site.name}`,
@@ -11,8 +12,22 @@ export const metadata: Metadata = {
 };
 
 export default function ExperimentsPage() {
+  // Resolve media existence on the server, then hand plain data to the client grid.
+  const items: ExpItem[] = craft.map((c) => {
+    const videoPath = `/videos/${c.slug}.mp4`;
+    return {
+      slug: c.slug,
+      title: c.title,
+      description: c.descriptor,
+      liveUrl: c.liveUrl,
+      tools: c.tools ?? [],
+      thumb: c.thumb,
+      video: assetExists(videoPath) ? videoPath : null,
+    };
+  });
+
   return (
-    <main id="main" className="mx-auto w-full max-w-[720px] px-6 pb-20">
+    <main id="main" className="mx-auto w-full max-w-[860px] px-6 pb-20">
       <Nav />
 
       {/* ── Header ───────────────────────────────────────────── */}
@@ -26,26 +41,9 @@ export default function ExperimentsPage() {
         </p>
       </section>
 
-      {/* ── Landing page explorations ────────────────────────── */}
-      <section className="mt-14">
-        <h2 className="mb-6 text-[13px] font-medium uppercase tracking-[0.06em] text-[color:var(--text-dim)]">
-          Landing pages
-        </h2>
-        <div className="card-grid">
-          {craft.map((c) => (
-            <WorkCard
-              key={c.slug}
-              card={{
-                title: c.title,
-                descriptor: c.descriptor,
-                thumb: c.thumb,
-                href: `/craft/${c.slug}`,
-                video: `/videos/${c.slug}.mp4`,
-                tags: c.tags,
-              }}
-            />
-          ))}
-        </div>
+      {/* ── Pinterest grid + detail modal ────────────────────── */}
+      <section className="mt-12">
+        <ExperimentsGrid items={items} />
       </section>
 
       <Footer />
