@@ -36,15 +36,17 @@ export default function FrameSlot({
           <img src={src} alt={alt} loading="lazy" className="h-full w-full object-contain" />
         </div>
       ) : (
+        // Dark placeholder so the label/path stay readable on dark case-study
+        // pages (never rendered on Authentication Audit — all its images exist).
         <div
-          className="flex flex-col justify-end gap-2 rounded-[var(--radius)] border border-dashed border-[color:var(--hairline)] bg-[#f2f2f2] p-5"
+          className="flex flex-col justify-end gap-2 rounded-[var(--radius)] border border-dashed border-[color:var(--hairline)] bg-[color:var(--surface)] p-5"
           style={{ aspectRatio: ratio }}
         >
           <span className="t-meta">Image slot{label ? ` · ${label}` : ""}</span>
-          <p className="max-w-[46ch] text-[13px] leading-snug text-[color:var(--muted)]">
+          <p className="max-w-[46ch] text-[13px] leading-snug text-[color:var(--text-dim)]">
             {alt}
           </p>
-          <code className="font-[family-name:var(--font-mono)] text-[11px] text-[color:var(--muted)]">
+          <code className="font-[family-name:var(--font-mono)] text-[11px] text-[color:var(--text-dim)]">
             {src.replace(/^\//, "public/")}
           </code>
         </div>
