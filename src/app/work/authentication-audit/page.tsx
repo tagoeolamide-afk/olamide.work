@@ -196,7 +196,7 @@ function Why({ children }: { children: React.ReactNode }) {
 
 function Msg({ label, text }: { label: string; text: string }) {
   return (
-    <div className="mt-4 max-w-[46rem] rounded-[var(--radius)] bg-[#f2f2f2] px-4 py-3">
+    <div className="mt-4 max-w-[46rem] rounded-[var(--radius)] border border-[color:var(--hairline)] bg-[color:var(--surface)] px-4 py-3">
       <span className="t-meta">{label}</span>
       <p className="mt-1 text-[14px] text-[color:var(--ink)]">{text}</p>
     </div>
@@ -221,7 +221,13 @@ export default function AuthenticationAuditPage() {
 
       <div className="mt-10 lg:grid lg:grid-cols-[180px_minmax(0,1fr)] lg:gap-14">
         <TableOfContents sections={SECTIONS} />
-        <main id="main" className="min-w-0 max-w-[820px]">
+        <main
+          id="main"
+          className="min-w-0 max-w-[820px]"
+          // Case study reads as all-white text: resolve the secondary tokens to
+          // the primary color for this column only (the sidebar keeps its states).
+          style={{ "--text-dim": "var(--text)", "--muted": "var(--text)" } as React.CSSProperties}
+        >
           {/* 1 · Hero */}
           <div>
         <span className="t-meta">Self-initiated</span>
