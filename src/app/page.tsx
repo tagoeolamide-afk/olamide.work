@@ -19,6 +19,12 @@ const latest: {
     dim: "built for Nigerian freelancers",
   },
   {
+    href: "/work/onchain-fund-creator",
+    img: "/images/onchain-fund-creator/hero-allocation.png",
+    lead: "Onchain fund creation,",
+    dim: "without smart-contract knowledge",
+  },
+  {
     href: "/work/authentication-audit",
     img: "/images/authentication-audit/frames/1.png",
     lead: "Auditing a fintech's authentication,",
@@ -80,23 +86,36 @@ export default function Home() {
       {/* ── My latest work (2-col grid, spans full container) ── */}
       <section id="work" className="mt-24 scroll-mt-8">
         <div className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2">
-          {latest.map((p) => (
-            <Link key={p.href} href={p.href} className="group block">
-              <h2 className="text-[clamp(1.25rem,3vw,1.625rem)] font-medium tracking-[-0.02em]">
-                {p.lead} <span className="dim">{p.dim}</span>
-              </h2>
-              <div className="mt-4 overflow-hidden rounded-2xl border border-[color:var(--hairline)] bg-[color:var(--surface)]">
-                <Image
-                  src={p.img}
-                  alt={`${p.lead} ${p.dim}`}
-                  width={1600}
-                  height={1000}
-                  sizes="(max-width: 768px) 100vw, 545px"
-                  className="h-auto w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-                />
-              </div>
-            </Link>
-          ))}
+          {latest.map((p) => {
+            const hasCover = assetExists(p.img);
+            return (
+              <Link key={p.href} href={p.href} className="group block">
+                <h2 className="text-[clamp(1.25rem,3vw,1.625rem)] font-medium tracking-[-0.02em]">
+                  {p.lead} <span className="dim">{p.dim}</span>
+                </h2>
+                {/* Equal frames: fixed ratio + object-cover so every card matches. */}
+                <div className="mt-4 aspect-[16/10] overflow-hidden rounded-2xl border border-[color:var(--hairline)] bg-[color:var(--surface)]">
+                  {hasCover ? (
+                    <Image
+                      src={p.img}
+                      alt={`${p.lead} ${p.dim}`}
+                      width={1600}
+                      height={1000}
+                      sizes="(max-width: 768px) 100vw, 545px"
+                      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                    />
+                  ) : (
+                    <div className="flex h-full flex-col justify-end gap-1 p-4">
+                      <span className="t-meta">Cover image</span>
+                      <code className="font-[family-name:var(--font-mono)] text-[11px] text-[color:var(--text-dim)]">
+                        {p.img.replace(/^\//, "public/")}
+                      </code>
+                    </div>
+                  )}
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
