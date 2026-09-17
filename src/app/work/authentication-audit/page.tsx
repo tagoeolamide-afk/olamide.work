@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { site } from "@/content/site";
 import FrameSlot from "@/components/FrameSlot";
 import Lightbox from "@/components/Lightbox";
+import TableOfContents from "@/components/TableOfContents";
 
 const DIR = "/images/authentication-audit";
 
@@ -14,6 +15,24 @@ export const metadata: Metadata = {
 
 /* ---------- small building blocks (kept on-brand) ---------- */
 
+const slug = (s: string) =>
+  s.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+// Order + labels for the "On this page" sidebar (must match the Section titles).
+const SECTIONS = [
+  "Overview",
+  "Background",
+  "The Problem",
+  "Goals",
+  "Process",
+  "Research and Findings",
+  "Key Insights",
+  "Design Solutions",
+  "Design System",
+  "Outcome",
+  "Reflections",
+].map((t) => ({ id: slug(t), label: t }));
+
 function Section({
   n,
   title,
@@ -24,7 +43,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="mt-16 sm:mt-20">
+    <section id={slug(title)} className="mt-16 scroll-mt-8 sm:mt-20">
       <div className="mb-6 flex items-baseline gap-4">
         <span className="t-meta">{n}</span>
         <h2 className="text-[1.5rem] font-semibold leading-tight tracking-[-0.01em] text-[color:var(--ink)]">
@@ -189,7 +208,7 @@ function Msg({ label, text }: { label: string; text: string }) {
 export default function AuthenticationAuditPage() {
   return (
     <Lightbox>
-    <main id="main" className="mx-auto w-full max-w-[900px] px-6 pb-24 pt-8">
+    <div className="mx-auto w-full max-w-[1120px] px-6 pb-24 pt-8 sm:px-8">
       {/* header / back nav */}
       <header className="flex items-baseline justify-between">
         <Link href="/" className="t-name inline-block transition-opacity hover:opacity-60">
@@ -200,8 +219,11 @@ export default function AuthenticationAuditPage() {
         </Link>
       </header>
 
-      {/* 1 · Hero */}
-      <div className="mt-16">
+      <div className="mt-10 lg:grid lg:grid-cols-[180px_minmax(0,1fr)] lg:gap-14">
+        <TableOfContents sections={SECTIONS} />
+        <main id="main" className="min-w-0 max-w-[820px]">
+          {/* 1 · Hero */}
+          <div>
         <span className="t-meta">Self-initiated</span>
         <h1 className="mt-3 max-w-[20ch] text-[clamp(1.9rem,4.5vw,2.75rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-[color:var(--ink)]">
           Authentication System Audit
@@ -1016,7 +1038,9 @@ export default function AuthenticationAuditPage() {
           {site.email}
         </a>
       </footer>
-    </main>
+        </main>
+      </div>
+    </div>
     </Lightbox>
   );
 }
