@@ -4,7 +4,6 @@ import { site } from "@/content/site";
 const LINKS: [string, string][] = [
   ["Projects", "/"],
   ["Experiments", "/experiments"],
-  ["About", "/about"],
 ];
 
 /** Shared site footer: identity, links, contact, copyright. */

@@ -8,7 +8,6 @@ import { site } from "@/content/site";
 const TABS: [string, string][] = [
   ["Projects", "/"],
   ["Experiments", "/experiments"],
-  ["About", "/about"],
 ];
 
 /** Avatar logo (desktop only): official photo at /images/avatar.jpg, initials fallback. */
