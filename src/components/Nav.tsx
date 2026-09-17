@@ -28,16 +28,16 @@ function Logo() {
       aria-label="Home"
       className="absolute left-0 top-1/2 hidden -translate-y-1/2 sm:block"
     >
-      <span className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl border border-[color:var(--hairline)] bg-[color:var(--surface)] transition-opacity hover:opacity-80">
+      <span className="flex h-[50px] w-[50px] items-center justify-center overflow-hidden rounded-xl border border-[color:var(--hairline)] bg-[color:var(--surface)] transition-opacity hover:opacity-80">
         {failed ? (
-          <span className="text-[13px] font-medium text-[color:var(--text-dim)]">{initials}</span>
+          <span className="text-[14px] font-medium text-[color:var(--text-dim)]">{initials}</span>
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src="/images/avatar.jpg"
             alt={name}
-            width={40}
-            height={40}
+            width={50}
+            height={50}
             className="h-full w-full object-cover"
             onError={() => setFailed(true)}
           />

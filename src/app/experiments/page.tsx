@@ -41,8 +41,8 @@ export default function ExperimentsPage() {
         </p>
       </section>
 
-      {/* ── Pinterest grid + detail modal (left-aligned) ─────── */}
-      <section className="mt-12 max-w-[820px]">
+      {/* ── Pinterest grid + detail modal (spans container for balance) ── */}
+      <section className="mt-12">
         <ExperimentsGrid items={items} />
       </section>
 
