@@ -56,9 +56,9 @@ export default function Home() {
         </h1>
 
         <p className="mt-4 max-w-[42ch] text-[clamp(1.0625rem,2.4vw,1.3125rem)] leading-[1.45] text-[color:var(--text-dim)]">
-          <span className="hi">Product designer</span> focused on fintech, authentication,
-          and onboarding — flows that build trust and help people recover when something
-          breaks.
+          <span className="hi">Product designer</span> moving into design engineering. I
+          work end to end across UI, UX, and frontend — turning complex, ambiguous problems
+          into products that feel clear, considered, and effortless to use.
         </p>
 
         <div className="mt-7 flex flex-wrap items-center gap-3">
