@@ -91,6 +91,11 @@ function Chip({ children, strong }: { children: React.ReactNode; strong?: boolea
   );
 }
 
+/** Screenshot frame with a dark letterbox to match the product's dark UI. */
+function Shot(props: React.ComponentProps<typeof FrameSlot>) {
+  return <FrameSlot bg="#0a0a0b" {...props} />;
+}
+
 /** Horizontal chip flow, wraps on small screens (matches the audit process style). */
 function Flow({ steps }: { steps: string[] }) {
   return (
@@ -276,21 +281,21 @@ export default function OnchainFundCreatorPage() {
 
           {/* Hero visual: large Portfolio Allocation screen + two supporting screens */}
           <div className="mt-10">
-            <FrameSlot
-              src={`${DIR}/hero-allocation.png`}
+            <Shot
+              src={`${DIR}/allocation.png`}
               alt="Portfolio Allocation screen showing editable asset percentages beside a live donut chart of the fund"
               ratio="16 / 10"
             />
           </div>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <FrameSlot
+            <Shot
               src={`${DIR}/review.png`}
               alt="Review screen summarising the fund's assets, allocation, fee and ownership before launch"
               ratio="4 / 3"
               label="Review"
             />
-            <FrameSlot
-              src={`${DIR}/transaction-success.png`}
+            <Shot
+              src={`${DIR}/success.png`}
               alt="Deployment success screen confirming the fund is live onchain"
               ratio="4 / 3"
               label="Deployment success"
@@ -426,13 +431,6 @@ export default function OnchainFundCreatorPage() {
                 "Fund Dashboard",
               ]}
             />
-            <div className="mt-6">
-              <FrameSlot
-                src={`${DIR}/creation-flow.png`}
-                alt="Diagram of the end-to-end fund creation flow from dashboard through configuration, review, deployment and back to the fund dashboard"
-                ratio="16 / 9"
-              />
-            </div>
           </Section>
 
           {/* 04 · Key design decisions (largest section) */}
@@ -453,8 +451,8 @@ export default function OnchainFundCreatorPage() {
             </Prose>
 
             <div className="mt-6">
-              <FrameSlot
-                src={`${DIR}/allocation-main.png`}
+              <Shot
+                src={`${DIR}/allocation.png`}
                 alt="Portfolio Allocation screen with editable per-asset percentages, weighting method toggle and a live allocation donut chart"
                 ratio="16 / 10"
               />
@@ -467,26 +465,6 @@ export default function OnchainFundCreatorPage() {
                 { state: "104% allocated", note: "Reduce the allocation by 4%." },
               ]}
             />
-            <div className="grid gap-4 sm:grid-cols-3">
-              <FrameSlot
-                src={`${DIR}/allocation-93.png`}
-                alt="Allocation validation showing 93 percent allocated with a prompt to assign the remaining 7 percent"
-                ratio="4 / 3"
-                label="93%"
-              />
-              <FrameSlot
-                src={`${DIR}/allocation-100.png`}
-                alt="Allocation validation showing 100 percent allocated and ready to continue"
-                ratio="4 / 3"
-                label="100%"
-              />
-              <FrameSlot
-                src={`${DIR}/allocation-104.png`}
-                alt="Allocation validation showing 104 percent allocated with a prompt to reduce the allocation by 4 percent"
-                ratio="4 / 3"
-                label="104%"
-              />
-            </div>
             <Prose>
               <P>This prevents an invalid portfolio from reaching the deployment stage.</P>
             </Prose>
@@ -513,8 +491,8 @@ export default function OnchainFundCreatorPage() {
               </P>
             </Prose>
             <div className="mt-6">
-              <FrameSlot
-                src={`${DIR}/rebalancing.png`}
+              <Shot
+                src={`${DIR}/strategy.png`}
                 alt="Rebalancing Strategy screen with a collapsed Advanced Settings control kept out of the primary path"
                 ratio="16 / 10"
               />
@@ -544,13 +522,13 @@ export default function OnchainFundCreatorPage() {
               <P>Only then do they continue to the wallet.</P>
             </Prose>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <FrameSlot
+              <Shot
                 src={`${DIR}/review.png`}
                 alt="Review Fund screen listing the configured assets, allocation, fee and ownership"
                 ratio="4 / 3"
                 label="Review Fund"
               />
-              <FrameSlot
+              <Shot
                 src={`${DIR}/ready-to-launch.png`}
                 alt="Ready to Launch confirmation showing the network, connected wallet, estimated fee and what becomes public"
                 ratio="4 / 3"
@@ -585,38 +563,6 @@ export default function OnchainFundCreatorPage() {
               </P>
             </Prose>
 
-            {/*
-              Static frames below. If a looping deployment recording is later added at
-              /videos/onchain-fund-creator/deployment.mp4, it can replace this sequence —
-              gate autoplay behind prefers-reduced-motion (muted, no sound, playsInline).
-            */}
-            <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-              <FrameSlot
-                src={`${DIR}/transaction-waiting.png`}
-                alt="Deployment state waiting for wallet approval"
-                ratio="9 / 16"
-                label="Waiting for approval"
-              />
-              <FrameSlot
-                src={`${DIR}/transaction-submitted.png`}
-                alt="Deployment state showing the transaction has been submitted to the network"
-                ratio="9 / 16"
-                label="Submitted"
-              />
-              <FrameSlot
-                src={`${DIR}/transaction-confirming.png`}
-                alt="Deployment state confirming the fund on the network"
-                ratio="9 / 16"
-                label="Confirming"
-              />
-              <FrameSlot
-                src={`${DIR}/transaction-success.png`}
-                alt="Deployment success state confirming the fund is deployed and live"
-                ratio="9 / 16"
-                label="Live"
-              />
-            </div>
-
             <Prose>
               <P>I also designed recovery paths for:</P>
             </Prose>
@@ -632,20 +578,6 @@ export default function OnchainFundCreatorPage() {
             <Prose>
               <P>Each error explains what happened and gives the creator a clear next action.</P>
             </Prose>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <FrameSlot
-                src={`${DIR}/error-wrong-network.png`}
-                alt="Wrong network error explaining the connected wallet is on the wrong network and how to switch"
-                ratio="4 / 3"
-                label="Wrong network"
-              />
-              <FrameSlot
-                src={`${DIR}/error-rejected.png`}
-                alt="Transaction rejected error explaining the wallet declined the transaction and how to retry"
-                ratio="4 / 3"
-                label="Transaction rejected"
-              />
-            </div>
           </Section>
 
           {/* 06 · Supporting the creator after launch */}
@@ -674,17 +606,17 @@ export default function OnchainFundCreatorPage() {
               </P>
             </Prose>
             <div className="mt-6">
-              <FrameSlot
+              <Shot
                 src={`${DIR}/fund-dashboard.png`}
                 alt="Fund Management Dashboard showing current composition, target allocation, drift and next rebalance"
                 ratio="16 / 10"
               />
             </div>
-            <div className="mt-4 max-w-[560px]">
-              <FrameSlot
+            <div className="mt-4">
+              <Shot
                 src={`${DIR}/rebalance-review.png`}
-                alt="Rebalance Review screen comparing current portfolio composition against the target allocation"
-                ratio="4 / 3"
+                alt="Rebalance Review screen listing what the fund will buy and sell to return to its target allocation"
+                ratio="16 / 10"
                 label="Rebalance review"
               />
             </div>
@@ -707,18 +639,18 @@ export default function OnchainFundCreatorPage() {
               </P>
             </Prose>
             <div className="mt-6">
-              <FrameSlot
-                src={`${DIR}/component-strip.png`}
-                alt="Component strip showing a primary button, input states, an asset row, a wallet control, a status message and a transaction state"
-                ratio="16 / 6"
+              <Shot
+                src={`${DIR}/components.png`}
+                alt="Reusable empty, loading, status and error states — no funds, no wallet, wrong network, insufficient fee, rejected, delayed and failed transactions — with consistent messaging and recovery actions"
+                ratio="3 / 2"
               />
             </div>
             <div className="mt-4">
-              <FrameSlot
+              <Shot
                 src={`${DIR}/light-dark.png`}
-                alt="Portfolio Allocation screen shown side by side in light mode and dark mode with identical information hierarchy"
-                ratio="16 / 9"
-                label="Light / Dark"
+                alt="The Manage Allocation screen rendered in light mode, keeping the same information hierarchy as the dark theme used across the product"
+                ratio="16 / 10"
+                label="Light and dark themes"
               />
             </div>
           </Section>
@@ -759,14 +691,6 @@ export default function OnchainFundCreatorPage() {
 
             <div className="mt-8">
               <PrototypeCTA />
-            </div>
-
-            <div className="mt-8">
-              <FrameSlot
-                src={`${DIR}/final-montage.png`}
-                alt="Montage of the final experience: asset selection, portfolio allocation, transaction processing and the fund dashboard"
-                ratio="16 / 9"
-              />
             </div>
           </Section>
 

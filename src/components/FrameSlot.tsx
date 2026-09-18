@@ -10,12 +10,15 @@ export default function FrameSlot({
   alt,
   ratio = "16 / 10",
   label,
+  bg = "#f2f2f2",
 }: {
   src: string;
   alt: string;
   ratio?: string;
   /** small caption above the frame, e.g. "Before" / "After" */
   label?: string;
+  /** letterbox colour behind the image — pass a dark value for dark screenshots */
+  bg?: string;
 }) {
   const has = assetExists(src);
   return (
@@ -29,8 +32,8 @@ export default function FrameSlot({
           role="button"
           tabIndex={0}
           aria-label={`View image: ${alt}`}
-          className="cursor-zoom-in overflow-hidden rounded-[var(--radius)] border border-[color:var(--hairline)] bg-[#f2f2f2] transition-opacity hover:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[color:var(--ink)]"
-          style={{ aspectRatio: ratio }}
+          className="cursor-zoom-in overflow-hidden rounded-[var(--radius)] border border-[color:var(--hairline)] transition-opacity hover:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[color:var(--ink)]"
+          style={{ aspectRatio: ratio, backgroundColor: bg }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={src} alt={alt} loading="lazy" className="h-full w-full object-contain" />

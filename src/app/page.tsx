@@ -20,7 +20,7 @@ const latest: {
   },
   {
     href: "/work/onchain-fund-creator",
-    img: "/images/onchain-fund-creator/hero-allocation.png",
+    img: "/images/onchain-fund-creator/allocation.png",
     lead: "Onchain fund creation,",
     dim: "without smart-contract knowledge",
   },
