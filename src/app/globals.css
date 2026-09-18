@@ -1,53 +1,98 @@
 @import "tailwindcss";
 
 /* ============================================================
-   TOKENS — measured 1:1 from pariola.work (see DESIGN.md).
-   The iron rule: every value here was measured, not eyeballed.
+   TOKENS — redesign (dark). Olamide's own identity.
+   BG #1E1E1E · text = white (primary ~70%) + #9AA0A8 (dim ~30%)
+   mixed per sentence · #2D6CDF highlights important words.
+   Geist, tracking -2px at display, scaled down via em on smaller text.
    ============================================================ */
 :root {
-  /* Colour — measured from computed styles */
-  --bg:     #f9f9f9;   /* page background          */
-  --ink:    #060606;   /* headings, name, labels   */
-  --muted:  #666666;   /* body, descriptions, dates */
-  --hairline: #e6e6e6; /* borders (substituted; Pariola uses near-none) */
+  /* Colour */
+  --bg:        #1e1e1e;              /* page background                    */
+  --text:      #ffffff;             /* primary words (~70% of a sentence) */
+  --text-dim:  #9aa0a8;             /* secondary words (~30%)             */
+  --accent:    #2d6cdf;             /* highlighted / important words      */
+  --hairline:  rgba(255, 255, 255, 0.12);
+  --surface:   #262626;             /* raised cards / media wells         */
 
-  /* Layout — measured */
-  --column: 608px;     /* centred content column   */
-  --gap-section: 104px;/* block → next section     */
-  --gap-name-body: 64px;
+  /* Adaptive glass/chip surfaces (Nav pill, tool chips) — flip in light mode */
+  --glass-border:    rgba(255, 255, 255, 0.10);
+  --glass-bg:        rgba(255, 255, 255, 0.06);
+  --glass-bg-active: rgba(255, 255, 255, 0.10);
+  --glass-shadow:    0 8px 30px rgba(0, 0, 0, 0.35);
+  --chip-border:     rgba(255, 255, 255, 0.10);
+  --chip-bg:         rgba(255, 255, 255, 0.04);
+  color-scheme: dark;
+
+  /* Type tracking — -0.03em ≈ -2px at ~64px display; scales down with size */
+  --tracking: -0.03em;
+
+  /* Layout */
+  --column: 640px;
+  --gap-section: 104px;
+  --gap-name-body: 48px;
   --gap-para: 24px;
 
-  /* Motion — measured from card transitions */
+  /* Motion */
   --ease-out: ease-out;
   --dur-img: 320ms;
 
-  --radius: 0px;       /* sharp corners, measured   */
+  --radius: 8px;
 
-  /* Compatibility aliases so the case-study detail template (built on the
-     earlier system) inherits this palette without a rewrite. */
+  /* Back-compat aliases so existing components keep working while we rebuild
+     the layout page by page on this branch. */
+  --ink: var(--text);
+  --muted: var(--text-dim);
   --rule-hairline: var(--hairline);
-  --rule-strong: var(--ink);
-  --clay-600: var(--ink);
+  --rule-strong: var(--text);
+  --clay-600: var(--accent);
   --measure: 62ch;
   --space-section: 80px;
   --space-section-sm: 56px;
-  --text-primary: var(--ink);
+  --text-primary: var(--text);
+}
+
+/* ============================================================
+   LIGHT THEME — toggled via <html data-theme="light">.
+   Colours meet WCAG AA and follow Material's light surface model:
+   - text  #1b1b1f on #ffffff  ≈ 16:1 (AAA)
+   - dim   #55585f on #ffffff  ≈ 7:1  (AA/AAA), on #f4f4f5 ≈ 6:1
+   - white on accent #1d4ed8   ≈ 6.4:1 (AA) for the .hi marker
+   ============================================================ */
+:root[data-theme="light"] {
+  --bg:        #ffffff;
+  --text:      #1b1b1f;
+  --text-dim:  #55585f;
+  --accent:    #1d4ed8;
+  --hairline:  rgba(0, 0, 0, 0.12);
+  --surface:   #f4f4f5;
+
+  --glass-border:    rgba(0, 0, 0, 0.10);
+  --glass-bg:        rgba(0, 0, 0, 0.04);
+  --glass-bg-active: rgba(0, 0, 0, 0.08);
+  --glass-shadow:    0 8px 30px rgba(0, 0, 0, 0.10);
+  --chip-border:     rgba(0, 0, 0, 0.10);
+  --chip-bg:         rgba(0, 0, 0, 0.04);
+  color-scheme: light;
 }
 
 @theme inline {
-  --color-bg:    var(--bg);
-  --color-ink:   var(--ink);
-  --color-muted: var(--muted);
-  --color-hairline: var(--hairline);
+  --color-bg:        var(--bg);
+  --color-text:      var(--text);
+  --color-dim:       var(--text-dim);
+  --color-accent:    var(--accent);
+  --color-surface:   var(--surface);
+  --color-hairline:  var(--hairline);
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
-  /* Compatibility colour utilities for the detail template */
-  --color-primary:   var(--ink);
-  --color-secondary: var(--muted);
-  --color-accent:    var(--ink);
+  /* Back-compat colour utilities (map old names onto the new palette) */
+  --color-ink:       var(--text);
+  --color-muted:     var(--text-dim);
+  --color-primary:   var(--text);
+  --color-secondary: var(--text-dim);
   --color-base:      var(--bg);
-  --color-sunken:    #efefef;
+  --color-sunken:    var(--surface);
 }
 
 /* ============================================================
@@ -65,20 +110,37 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
-  color: var(--ink);
+  color: var(--text);
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.5;
+  letter-spacing: var(--tracking); /* em-based → scales down on smaller text */
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  transition: background-color 300ms ease, color 300ms ease; /* theme switch */
 }
 
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
+  border-radius: 4px;
 }
 
-::selection { background: #060606; color: #f9f9f9; }
+::selection { background: var(--accent); color: #fff; }
+
+/* ---- Two-tone sentence colouring (70/30) + keyword highlight */
+/* Default text is white; wrap secondary words in .dim. .hi is a solid blue
+   marker block behind a KEYWORD (white text on accent), not coloured text. */
+.dim { color: var(--text-dim); }
+.hi {
+  background-color: var(--accent);
+  color: #ffffff;
+  padding: 0.02em 0.2em;
+  border-radius: 3px;
+  /* keep the block tidy if the keyword wraps across lines */
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
 
 /* ---- Column ---------------------------------------------- */
 /* 608px centred, measured. Side padding on narrow screens.   */
@@ -89,29 +151,29 @@ body {
   margin-inline: auto;
 }
 
-/* ---- Type roles (all 16px; hierarchy = weight + colour) --- */
-.t-name  { font-size: 16px; font-weight: 600; line-height: 22px; color: var(--ink); }
-.t-role  { font-size: 16px; font-weight: 400; line-height: 22px; color: var(--ink); }
-.t-lead  { font-size: 16px; font-weight: 400; line-height: 24px; color: var(--muted); }
-.t-label { font-size: 16px; font-weight: 600; line-height: 24px; color: var(--ink); }
+/* ---- Type roles — colours default to the 70/30 intent ----- */
+/* Leads and body default WHITE (wrap the ~30% secondary words in .dim);
+   subtitle/caption/meta roles default dim. Tracking inherits the em-based
+   -0.03em from body, so it scales down on smaller sizes automatically. */
+.t-name  { font-size: 16px; font-weight: 600; line-height: 22px; color: var(--text); }
+.t-role  { font-size: 16px; font-weight: 400; line-height: 22px; color: var(--text-dim); }
+.t-lead  { font-size: 16px; font-weight: 400; line-height: 24px; color: var(--text); }
+.t-label { font-size: 16px; font-weight: 600; line-height: 24px; color: var(--text); }
 
-.t-card-title { font-size: 15px; font-weight: 500; line-height: 20px; color: var(--ink); }
-.t-card-desc  { font-size: 13px; font-weight: 400; line-height: 1.375; color: var(--muted); }
-.t-date       { font-size: 12px; font-weight: 500; color: var(--muted); font-variant-numeric: tabular-nums; }
+.t-card-title { font-size: 15px; font-weight: 500; line-height: 20px; color: var(--text); }
+.t-card-desc  { font-size: 13px; font-weight: 400; line-height: 1.375; color: var(--text-dim); }
+.t-date       { font-size: 12px; font-weight: 500; color: var(--text-dim); font-variant-numeric: tabular-nums; }
 
 .t-meta {
   font-family: var(--font-mono);
   font-size: 12px; font-weight: 500;
-  letter-spacing: 0.02em;
-  color: var(--muted);
+  letter-spacing: 0.02em; /* mono reads better without negative tracking */
+  color: var(--text-dim);
 }
 
-/* Detail-page roles: coherent flat system with a little size for
-   readability (Pariola's detail pages weren't measured, so these are
-   a restrained extension, not a claimed 1:1). */
-.t-display   { font-size: clamp(20px, 3vw, 26px); font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; color: var(--ink); }
-.t-statement { font-size: clamp(22px, 4vw, 30px); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; color: var(--ink); }
-.t-body      { font-size: 16px; font-weight: 400; line-height: 24px; color: var(--muted); max-width: 62ch; }
+.t-display   { font-size: clamp(20px, 3vw, 26px); font-weight: 600; line-height: 1.2; color: var(--text); }
+.t-statement { font-size: clamp(22px, 4vw, 30px); font-weight: 600; line-height: 1.25; color: var(--text); }
+.t-body      { font-size: 16px; font-weight: 400; line-height: 24px; color: var(--text); max-width: 62ch; }
 .font-display { font-family: var(--font-sans); }
 
 /* ---- Section header (icon + label), measured -------------- */
@@ -132,10 +194,10 @@ body {
 
 .card-media {
   position: relative;
-  aspect-ratio: 16 / 10;      /* measured 1.60 */
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   border-radius: var(--radius);
-  background: #efefef;
+  background: var(--surface);
 }
 .card-media img,
 .card-media .placeholder { transition: transform var(--dur-img) var(--ease-out), opacity var(--dur-img) var(--ease-out); }

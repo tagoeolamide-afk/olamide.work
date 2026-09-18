@@ -1,137 +1,126 @@
 import Link from "next/link";
-import { site, selectedWork, craft, skills } from "@/content/site";
-import SectionIcon from "@/components/SectionIcon";
-import WorkCard from "@/components/WorkCard";
-import CraftScroller from "@/components/CraftScroller";
+import Image from "next/image";
+import { site } from "@/content/site";
+import { assetExists } from "@/lib/assets";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 
-function SectionHead({ label }: { label: string }) {
-  return (
-    <div className="section-head">
-      <SectionIcon />
-      <span className="t-label">{label}</span>
-    </div>
-  );
-}
+/** Latest-work list: descriptive title line above a large full-width cover. */
+const latest: {
+  href: string;
+  img: string;
+  lead: string;
+  dim: string;
+}[] = [
+  {
+    href: "/work/pave",
+    img: "/images/pave/frames/01.png",
+    lead: "Dollar banking,",
+    dim: "built for Nigerian freelancers",
+  },
+  {
+    href: "/work/onchain-fund-creator",
+    img: "/images/onchain-fund-creator/allocation.png",
+    lead: "Onchain fund creation,",
+    dim: "without smart-contract knowledge",
+  },
+  {
+    href: "/work/authentication-audit",
+    img: "/images/authentication-audit/frames/1.png",
+    lead: "Auditing a fintech's authentication,",
+    dim: "end to end",
+  },
+];
 
 export default function Home() {
-  const contactLinks: [string, string][] = [
-    ["Email me", `mailto:${site.email}`],
-    ...(site.links.linkedin ? [["LinkedIn", site.links.linkedin] as [string, string]] : []),
-    ...(site.links.github ? [["GitHub", site.links.github] as [string, string]] : []),
-    ...(site.links.dribbble ? [["Dribbble", site.links.dribbble] as [string, string]] : []),
-    ...(site.links.behance ? [["Behance", site.links.behance] as [string, string]] : []),
-    ...(site.links.resume ? [["Résumé", site.links.resume] as [string, string]] : []),
-  ];
+  const name = site.name.replace(/\.$/, "");
+  const avatar = "/images/avatar.jpg";
+  const hasAvatar = assetExists(avatar);
+  const initials = name
+    .split(" ")
+    .map((w) => w[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
 
   return (
-    <main id="main" className="column pt-16 pb-24">
-      {/* ── Hero: name / role, then the paragraphs ───────────── */}
-      <header>
-        <Link href="/" className="t-name inline-block">
-          {site.name}
-        </Link>
-        <p className="t-role">{site.role}</p>
-      </header>
+    <main id="main" className="mx-auto w-full max-w-[1120px] px-6 pb-20 sm:px-8">
+      <Nav />
 
-      <div className="mt-[var(--gap-name-body)] flex flex-col gap-[var(--gap-para)]">
-        {site.hero.map((p, i) => (
-          <p key={i} className="t-lead">
-            {p}
-          </p>
-        ))}
-      </div>
+      {/* ── Hero (left-aligned content column) ───────────────── */}
+      <section className="max-w-[560px] pt-8 sm:pt-12">
+        <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border border-[color:var(--hairline)] bg-[color:var(--surface)] sm:hidden">
+          {hasAvatar ? (
+            <Image src={avatar} alt={name} width={56} height={56} className="h-full w-full object-cover" />
+          ) : (
+            <span className="text-[16px] font-medium text-[color:var(--text-dim)]">{initials}</span>
+          )}
+        </div>
 
-      {/* ── About ────────────────────────────────────────────── */}
-      <section className="mt-[var(--gap-section)]">
-        <SectionHead label="About." />
-        <div className="flex flex-col gap-[var(--gap-para)]">
-          {site.about.map((p, i) => (
-            <p key={i} className="t-lead">
-              {p}
-            </p>
-          ))}
+        <h1 className="mt-6 text-[clamp(2.25rem,6vw,3.25rem)] font-medium leading-[1.02] tracking-[-0.03em] sm:mt-0">
+          {name}
+        </h1>
+
+        <p className="mt-4 max-w-[42ch] text-[clamp(1.0625rem,2.4vw,1.3125rem)] leading-[1.45] text-[color:var(--text-dim)]">
+          I turn complex problems into clear <span className="hi">digital products</span>,
+          from early ideas and user flows to polished interfaces. I&rsquo;m also expanding my{" "}
+          <span className="hi">frontend</span> skills, bringing design and implementation
+          closer together.
+        </p>
+
+        <div className="mt-7 flex flex-wrap items-center gap-3">
+          <a
+            href="#work"
+            className="rounded-full bg-[color:var(--text)] px-5 py-2.5 text-[14px] font-medium text-[color:var(--bg)] transition-opacity hover:opacity-85"
+          >
+            My latest work
+          </a>
+          <a
+            href={`mailto:${site.email}`}
+            className="rounded-full border border-[color:var(--hairline)] px-5 py-2.5 text-[14px] text-[color:var(--text)] transition-colors hover:border-[color:var(--text-dim)]"
+          >
+            Let&rsquo;s chat
+          </a>
         </div>
       </section>
 
-      {/* ── Selected work ────────────────────────────────────── */}
-      <section className="mt-[var(--gap-section)]">
-        <SectionHead label="Selected work." />
-        <div className="card-grid">
-          {selectedWork.map((c) => (
-            <WorkCard key={c.title} card={c} />
-          ))}
-        </div>
-      </section>
-
-      {/* ── Core skills ──────────────────────────────────────── */}
-      <section className="mt-[var(--gap-section)]">
-        <SectionHead label="Core skills." />
-        <div className="grid gap-8 sm:grid-cols-2">
-          {skills.map((g) => (
-            <div key={g.group}>
-              <h3 className="text-[0.95rem] font-semibold text-[color:var(--ink)]">
-                {g.group}
-              </h3>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {g.items.map((it) => (
-                  <li
-                    key={it}
-                    className="rounded-full border border-[color:var(--hairline)] px-3 py-1 text-[13px] text-[color:var(--muted)]"
-                  >
-                    {it}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── For the love of design (horizontal scroll) ───────── */}
-      <section className="mt-[var(--gap-section)]">
-        <CraftScroller label="For the love of design.">
-          {craft.map((c) => (
-            <WorkCard
-              key={c.slug}
-              card={{
-                title: c.title,
-                descriptor: c.descriptor,
-                thumb: c.thumb,
-                href: `/craft/${c.slug}`,
-                // Card thumbnail plays this once the file exists in /public/videos/.
-                video: `/videos/${c.slug}.mp4`,
-                tags: c.tags,
-              }}
-            />
-          ))}
-        </CraftScroller>
-      </section>
-
-      {/* ── Open to product design roles (contact / footer) ──── */}
-      <footer id="contact" className="mt-[var(--gap-section)]">
-        <SectionHead label="Open to product design roles." />
-        <p className="t-lead max-w-[60ch] !text-[color:var(--ink)]">{site.rolesCopy}</p>
-
-        <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
-          {contactLinks.map(([label, href]) => {
-            const external = href.startsWith("http");
+      {/* ── My latest work (2-col grid, spans full container) ── */}
+      <section id="work" className="mt-24 scroll-mt-8">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2">
+          {latest.map((p) => {
+            const hasCover = assetExists(p.img);
             return (
-              <a
-                key={label}
-                href={href}
-                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                className="t-role underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60"
-              >
-                {label}
-              </a>
+              <Link key={p.href} href={p.href} className="group block">
+                <h2 className="text-[clamp(1.25rem,3vw,1.625rem)] font-medium tracking-[-0.02em]">
+                  {p.lead} <span className="dim">{p.dim}</span>
+                </h2>
+                {/* Equal frames: fixed ratio + object-cover so every card matches. */}
+                <div className="mt-4 aspect-[16/10] overflow-hidden rounded-2xl border border-[color:var(--hairline)] bg-[color:var(--surface)]">
+                  {hasCover ? (
+                    <Image
+                      src={p.img}
+                      alt={`${p.lead} ${p.dim}`}
+                      width={1600}
+                      height={1000}
+                      sizes="(max-width: 768px) 100vw, 545px"
+                      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                    />
+                  ) : (
+                    <div className="flex h-full flex-col justify-end gap-1 p-4">
+                      <span className="t-meta">Cover image</span>
+                      <code className="font-[family-name:var(--font-mono)] text-[11px] text-[color:var(--text-dim)]">
+                        {p.img.replace(/^\//, "public/")}
+                      </code>
+                    </div>
+                  )}
+                </div>
+              </Link>
             );
           })}
         </div>
+      </section>
 
-        <p className="t-date mt-10">
-          &copy; {new Date().getFullYear()} {site.name.replace(/\.$/, "")} · Designed &amp; built in Next.js
-        </p>
-      </footer>
+      <Footer />
     </main>
   );
 }
