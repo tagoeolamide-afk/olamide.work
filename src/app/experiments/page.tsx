@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { site, craft } from "@/content/site";
-import { assetExists } from "@/lib/assets";
+import { assetExists, pngSize } from "@/lib/assets";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ExperimentsGrid, { type ExpItem } from "@/components/ExperimentsGrid";
@@ -15,6 +15,7 @@ export default function ExperimentsPage() {
   // Resolve media existence on the server, then hand plain data to the client grid.
   const items: ExpItem[] = craft.map((c) => {
     const videoPath = `/videos/${c.slug}.mp4`;
+    const size = pngSize(c.thumb);
     return {
       slug: c.slug,
       title: c.title,
@@ -22,6 +23,8 @@ export default function ExperimentsPage() {
       liveUrl: c.liveUrl,
       tools: c.tools ?? [],
       thumb: c.thumb,
+      width: size?.width ?? 1600,
+      height: size?.height ?? 1000,
       video: assetExists(videoPath) ? videoPath : null,
     };
   });

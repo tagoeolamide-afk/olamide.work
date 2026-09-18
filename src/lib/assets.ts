@@ -18,6 +18,29 @@ export function assetExists(publicPath: string): boolean {
   }
 }
 
+/**
+ * Read a PNG's pixel dimensions from its IHDR header (no dependency).
+ * next/image needs width/height; we resolve them at build for /public PNGs.
+ * Returns null for non-PNG or unreadable files.
+ */
+export function pngSize(publicPath: string): { width: number; height: number } | null {
+  if (!publicPath) return null;
+  const rel = publicPath.replace(/^\//, "");
+  try {
+    const fd = fs.openSync(path.join(process.cwd(), "public", rel), "r");
+    const buf = Buffer.alloc(24);
+    fs.readSync(fd, buf, 0, 24, 0);
+    fs.closeSync(fd);
+    // PNG signature 0x89 'PNG' then IHDR width/height at bytes 16–23.
+    if (buf.readUInt32BE(0) !== 0x89504e47) return null;
+    const width = buf.readUInt32BE(16);
+    const height = buf.readUInt32BE(20);
+    return width && height ? { width, height } : null;
+  } catch {
+    return null;
+  }
+}
+
 const IMAGE_RE = /\.(png|jpe?g|webp|avif|gif)$/i;
 
 /**

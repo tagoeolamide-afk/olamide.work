@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 
 export type ExpItem = {
@@ -9,6 +10,8 @@ export type ExpItem = {
   liveUrl?: string;
   tools: string[];
   thumb: string;
+  width: number;
+  height: number;
   video: string | null;
 };
 
@@ -113,12 +116,14 @@ export default function ExperimentsGrid({ items }: { items: ExpItem[] }) {
                   <source src={it.video} type="video/mp4" />
                 </video>
               ) : (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   src={it.thumb}
                   alt={it.title}
-                  loading="lazy"
-                  className="block w-full transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                  width={it.width}
+                  height={it.height}
+                  quality={85}
+                  sizes="(max-width: 768px) 47vw, (max-width: 1120px) 32vw, 360px"
+                  className="block h-auto w-full transition-transform duration-500 ease-out group-hover:scale-[1.02]"
                 />
               )}
             </div>
@@ -158,8 +163,14 @@ export default function ExperimentsGrid({ items }: { items: ExpItem[] }) {
                   <source src={active.video} type="video/mp4" />
                 </video>
               ) : (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={active.thumb} alt={active.title} className="block w-full" />
+                <Image
+                  src={active.thumb}
+                  alt={active.title}
+                  width={active.width}
+                  height={active.height}
+                  sizes="(max-width: 680px) 90vw, 600px"
+                  className="block h-auto w-full"
+                />
               )}
             </div>
 
