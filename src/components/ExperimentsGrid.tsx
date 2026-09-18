@@ -19,7 +19,7 @@ function ToolIcon({ name }: { name: string }) {
 
   if (failed) {
     return (
-      <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[12px] text-[color:var(--text-dim)]">
+      <span className="rounded-full border border-[color:var(--chip-border)] bg-[color:var(--chip-bg)] px-3 py-1 text-[12px] text-[color:var(--text-dim)]">
         {label}
       </span>
     );
@@ -27,7 +27,7 @@ function ToolIcon({ name }: { name: string }) {
   return (
     <span
       title={label}
-      className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04]"
+      className="flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--chip-border)] bg-[color:var(--chip-bg)]"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img

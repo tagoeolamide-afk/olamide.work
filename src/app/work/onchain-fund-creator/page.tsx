@@ -4,6 +4,7 @@ import { site } from "@/content/site";
 import FrameSlot from "@/components/FrameSlot";
 import Lightbox from "@/components/Lightbox";
 import TableOfContents from "@/components/TableOfContents";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const DIR = "/images/onchain-fund-creator";
 
@@ -249,13 +250,16 @@ export default function OnchainFundCreatorPage() {
     <Lightbox>
     <div className="mx-auto w-full max-w-[1120px] px-6 pb-24 pt-8 sm:px-8">
       {/* header / back nav */}
-      <header className="flex items-baseline justify-between">
+      <header className="flex items-center justify-between">
         <Link href="/" className="t-name inline-block transition-opacity hover:opacity-60">
           {site.name}
         </Link>
-        <Link href="/" className="t-meta transition-colors hover:text-[color:var(--ink)]">
-          ← Back to home
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link href="/" className="t-meta transition-colors hover:text-[color:var(--ink)]">
+            ← Back to home
+          </Link>
+          <ThemeToggle />
+        </div>
       </header>
 
       <div className="mt-10 lg:grid lg:grid-cols-[180px_minmax(0,1fr)] lg:gap-14">

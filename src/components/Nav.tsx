@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { site } from "@/content/site";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const TABS: [string, string][] = [
   ["Projects", "/"],
@@ -56,7 +57,7 @@ export default function Nav() {
   return (
     <nav className="relative flex justify-center py-6">
       <Logo />
-      <ul className="inline-flex items-center gap-0.5 rounded-full border border-white/10 bg-white/[0.06] p-1 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+      <ul className="inline-flex items-center gap-0.5 rounded-full border border-[color:var(--glass-border)] bg-[color:var(--glass-bg)] p-1 shadow-[var(--glass-shadow)] backdrop-blur-xl">
         {TABS.map(([label, href]) => {
           const active = href === "/" ? path === "/" : path.startsWith(href);
           return (
@@ -66,7 +67,7 @@ export default function Nav() {
                 aria-current={active ? "page" : undefined}
                 className={`inline-block rounded-full px-4 py-1.5 text-[14px] transition-colors ${
                   active
-                    ? "bg-white/10 text-[color:var(--text)]"
+                    ? "bg-[color:var(--glass-bg-active)] text-[color:var(--text)]"
                     : "text-[color:var(--text-dim)] hover:text-[color:var(--text)]"
                 }`}
               >
@@ -76,6 +77,11 @@ export default function Nav() {
           );
         })}
       </ul>
+
+      {/* Theme toggle pinned right, mirroring the logo on the left */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2">
+        <ThemeToggle />
+      </div>
     </nav>
   );
 }

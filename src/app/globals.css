@@ -15,6 +15,15 @@
   --hairline:  rgba(255, 255, 255, 0.12);
   --surface:   #262626;             /* raised cards / media wells         */
 
+  /* Adaptive glass/chip surfaces (Nav pill, tool chips) — flip in light mode */
+  --glass-border:    rgba(255, 255, 255, 0.10);
+  --glass-bg:        rgba(255, 255, 255, 0.06);
+  --glass-bg-active: rgba(255, 255, 255, 0.10);
+  --glass-shadow:    0 8px 30px rgba(0, 0, 0, 0.35);
+  --chip-border:     rgba(255, 255, 255, 0.10);
+  --chip-bg:         rgba(255, 255, 255, 0.04);
+  color-scheme: dark;
+
   /* Type tracking — -0.03em ≈ -2px at ~64px display; scales down with size */
   --tracking: -0.03em;
 
@@ -41,6 +50,30 @@
   --space-section: 80px;
   --space-section-sm: 56px;
   --text-primary: var(--text);
+}
+
+/* ============================================================
+   LIGHT THEME — toggled via <html data-theme="light">.
+   Colours meet WCAG AA and follow Material's light surface model:
+   - text  #1b1b1f on #ffffff  ≈ 16:1 (AAA)
+   - dim   #55585f on #ffffff  ≈ 7:1  (AA/AAA), on #f4f4f5 ≈ 6:1
+   - white on accent #1d4ed8   ≈ 6.4:1 (AA) for the .hi marker
+   ============================================================ */
+:root[data-theme="light"] {
+  --bg:        #ffffff;
+  --text:      #1b1b1f;
+  --text-dim:  #55585f;
+  --accent:    #1d4ed8;
+  --hairline:  rgba(0, 0, 0, 0.12);
+  --surface:   #f4f4f5;
+
+  --glass-border:    rgba(0, 0, 0, 0.10);
+  --glass-bg:        rgba(0, 0, 0, 0.04);
+  --glass-bg-active: rgba(0, 0, 0, 0.08);
+  --glass-shadow:    0 8px 30px rgba(0, 0, 0, 0.10);
+  --chip-border:     rgba(0, 0, 0, 0.10);
+  --chip-bg:         rgba(0, 0, 0, 0.04);
+  color-scheme: light;
 }
 
 @theme inline {
@@ -84,6 +117,7 @@ body {
   letter-spacing: var(--tracking); /* em-based → scales down on smaller text */
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  transition: background-color 300ms ease, color 300ms ease; /* theme switch */
 }
 
 :focus-visible {
