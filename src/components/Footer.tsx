@@ -15,8 +15,9 @@ export default function Footer() {
       <div className="grid gap-8 sm:grid-cols-2">
         <div>
           <p className="text-[16px] font-medium text-[color:var(--text)]">{name}</p>
-          <p className="mt-2 max-w-[32ch] text-[14px] text-[color:var(--text-dim)]">
-            Product designer focused on fintech, authentication, and onboarding.
+          <p className="mt-2 max-w-[36ch] text-[14px] text-[color:var(--text-dim)]">
+            Product designer turning complex problems into clear digital products —
+            expanding into frontend to bring design and implementation closer.
           </p>
         </div>
 
