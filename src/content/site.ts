@@ -103,6 +103,7 @@ export type CraftItem = {
  * freely. Add `video` once a screen recording is exported to swap the still.
  */
 const CRAFT_DIR = "/images/for-the-love-of-design-section";
+const EXP_DIR = "/experiments";
 
 export const craft: CraftItem[] = [
   {
@@ -170,6 +171,148 @@ export const craft: CraftItem[] = [
       "A gallery web UI: a tight thumbnail grid on the left pairs with a large preview pane on the right, so browsing and viewing happen without ever leaving the page.",
     tags: ["UI Design", "Gallery"],
     tools: ["figma", "framer", "claude"],
+  },
+
+  /* ---- Additional experiments (public/experiments) ---------- */
+  {
+    slug: "recess-superstars",
+    title: "Recess — Superstars",
+    descriptor:
+      "An editorial hero for a studio called Recess: oversized blue type spells out football's biggest names, interleaved with a tilted photo collage. A layout study built on scale, overlap and rhythm.",
+    thumb: `${EXP_DIR}/recess-superstars.png`,
+    description:
+      "An editorial hero for a studio called Recess: oversized blue type spells out football's biggest names, interleaved with a tilted photo collage. A layout study built on scale, overlap and rhythm.",
+    tags: ["Editorial", "Typography", "Web Design"],
+  },
+  {
+    slug: "apex-banking",
+    title: "Apex — Banking Dashboard",
+    descriptor:
+      "A dark-theme banking dashboard. Card details, a stacked budget-overview chart and a spending gauge are grouped so income, expenses and limits read quickly without feeling dense.",
+    thumb: `${EXP_DIR}/apex-banking.png`,
+    description:
+      "A dark-theme banking dashboard. Card details, a stacked budget-overview chart and a spending gauge are grouped so income, expenses and limits read quickly without feeling dense.",
+    tags: ["Product UI", "Fintech", "Dashboard"],
+  },
+  {
+    slug: "world-cup-mbappe",
+    title: "World Cup 26 — Mbappé",
+    descriptor:
+      "An illustrated collectible sticker in the spirit of the classic World Cup album — Kylian Mbappé for France, with clean linework, a pixel name plate and the tournament's colour trim. Part of an ongoing player series.",
+    thumb: `${EXP_DIR}/world-cup-mbappe.png`,
+    description:
+      "An illustrated collectible sticker in the spirit of the classic World Cup album — Kylian Mbappé for France, with clean linework, a pixel name plate and the tournament's colour trim. Part of an ongoing player series.",
+    tags: ["Illustration", "World Cup Series", "Sports"],
+  },
+  {
+    slug: "polaris-hr",
+    title: "Polaris — HR Dashboard",
+    descriptor:
+      "A concept dashboard for an HR platform. Time-off allowance, current project, status tracker and notes sit in a calm card layout, so an employee can read where things stand in one glance.",
+    thumb: `${EXP_DIR}/polaris-hr.png`,
+    description:
+      "A concept dashboard for an HR platform. Time-off allowance, current project, status tracker and notes sit in a calm card layout, so an employee can read where things stand in one glance.",
+    tags: ["Product UI", "Dashboard", "SaaS"],
+  },
+  {
+    slug: "sushi-board",
+    title: "Sushi Board",
+    descriptor:
+      "A top-down sushi board illustration — maki, nigiri, a soy dish and chopsticks arranged with an even rhythm. A study in laying out many small objects into one balanced, readable composition.",
+    thumb: `${EXP_DIR}/sushi-board.png`,
+    description:
+      "A top-down sushi board illustration — maki, nigiri, a soy dish and chopsticks arranged with an even rhythm. A study in laying out many small objects into one balanced, readable composition.",
+    tags: ["Illustration", "Food"],
+  },
+  {
+    slug: "wang-build-in-public",
+    title: "Wang — Build In Public",
+    descriptor:
+      "A bold landing section for a design-and-build studio: a plain “helping designers build in public” statement, a scattered avatar grid and an oversized pixel wordmark anchoring the footer. A study in confident, high-contrast branding.",
+    thumb: `${EXP_DIR}/wang-build-in-public.png`,
+    description:
+      "A bold landing section for a design-and-build studio: a plain “helping designers build in public” statement, a scattered avatar grid and an oversized pixel wordmark anchoring the footer. A study in confident, high-contrast branding.",
+    tags: ["Landing Page", "Branding", "Web Design"],
+  },
+  {
+    slug: "world-cup-vinicius",
+    title: "World Cup 26 — Vinícius Jr",
+    descriptor:
+      "Vinícius Júnior for Brazil, drawn as a collectible World Cup sticker with matching linework, a pixel name plate and colour trim. The second in an illustrated player series.",
+    thumb: `${EXP_DIR}/world-cup-vinicius.png`,
+    description:
+      "Vinícius Júnior for Brazil, drawn as a collectible World Cup sticker with matching linework, a pixel name plate and colour trim. The second in an illustrated player series.",
+    tags: ["Illustration", "World Cup Series", "Sports"],
+  },
+  {
+    slug: "users-table",
+    title: "Users Table",
+    descriptor:
+      "A team-management table: name, title, status and role laid out with generous spacing and a single accent for actions. An exercise in keeping a data-dense list calm and easy to scan.",
+    thumb: `${EXP_DIR}/users-table.png`,
+    description:
+      "A team-management table: name, title, status and role laid out with generous spacing and a single accent for actions. An exercise in keeping a data-dense list calm and easy to scan.",
+    tags: ["Product UI", "Component", "Table"],
+  },
+  {
+    slug: "portrait-coral",
+    title: "Portrait — Coral",
+    descriptor:
+      "A clean vector portrait study: bold outlines, soft shading and a warm coral palette. Practice in capturing a calm, friendly likeness with a limited set of shapes.",
+    thumb: `${EXP_DIR}/portrait-coral.png`,
+    description:
+      "A clean vector portrait study: bold outlines, soft shading and a warm coral palette. Practice in capturing a calm, friendly likeness with a limited set of shapes.",
+    tags: ["Illustration", "Portrait"],
+  },
+  {
+    slug: "cashflow-dashboard",
+    title: "Cashflow — Invoicing",
+    descriptor:
+      "An invoicing dashboard: revenue, overdue, outstanding and expense stats above a recent-activity ledger with clear paid, withdraw and overdue states. A design taken through to a coded frontend.",
+    thumb: `${EXP_DIR}/cashflow-dashboard.png`,
+    description:
+      "An invoicing dashboard: revenue, overdue, outstanding and expense stats above a recent-activity ledger with clear paid, withdraw and overdue states. A design taken through to a coded frontend.",
+    tags: ["Product UI", "Fintech", "Frontend"],
+  },
+  {
+    slug: "upcoming-meetings",
+    title: "Upcoming Meetings",
+    descriptor:
+      "A scheduling component pairing a list of upcoming meetings — people, times and places — with a month calendar and a clear add-event action. A study in making a busy schedule scannable.",
+    thumb: `${EXP_DIR}/upcoming-meetings.png`,
+    description:
+      "A scheduling component pairing a list of upcoming meetings — people, times and places — with a month calendar and a clear add-event action. A study in making a busy schedule scannable.",
+    tags: ["Product UI", "Component", "Calendar"],
+  },
+  {
+    slug: "skillet-breakfast",
+    title: "Breakfast Skillet",
+    descriptor:
+      "A flat-illustration breakfast skillet — fried eggs, sausages, tomatoes and rocket, drawn top-down with clean linework and warm, appetising colour. A study in making a simple food scene feel tactile.",
+    thumb: `${EXP_DIR}/skillet-breakfast.png`,
+    description:
+      "A flat-illustration breakfast skillet — fried eggs, sausages, tomatoes and rocket, drawn top-down with clean linework and warm, appetising colour. A study in making a simple food scene feel tactile.",
+    tags: ["Illustration", "Food"],
+  },
+  {
+    slug: "assignee-select",
+    title: "Assignee Select",
+    descriptor:
+      "An “assigned to” dropdown with presence dots, a clear selected state and a scrollable list. A small interaction study in showing availability and selection at a glance.",
+    thumb: `${EXP_DIR}/assignee-select.png`,
+    description:
+      "An “assigned to” dropdown with presence dots, a clear selected state and a scrollable list. A small interaction study in showing availability and selection at a glance.",
+    tags: ["Product UI", "Component"],
+  },
+  {
+    slug: "retro-portrait",
+    title: "Retro Portrait",
+    descriptor:
+      "A flat, mid-century-styled character portrait — sculpted hair, a knitted orange vest and a restrained cream palette. An exercise in geometric shapes and confident, minimal shading.",
+    thumb: `${EXP_DIR}/retro-portrait.png`,
+    description:
+      "A flat, mid-century-styled character portrait — sculpted hair, a knitted orange vest and a restrained cream palette. An exercise in geometric shapes and confident, minimal shading.",
+    tags: ["Illustration", "Character"],
   },
 ];
 
